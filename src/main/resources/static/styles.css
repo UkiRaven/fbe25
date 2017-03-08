@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
 
 body {
-    font-family: 'Lato', Open Sans, sans-serif;
+    font-family: "Lato", "Open Sans", sans-serif;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+h1 {
+    font-family: "Open Sans", sans-serif;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
+a {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-header a {
+    font-size: 1.2em;
+    margin: 0 30px 0 30px;
 }

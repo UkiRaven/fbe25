@@ -5,6 +5,7 @@ import com.ukiraven.fbe25.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,12 +13,18 @@ import java.util.List;
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
+    private final ArticleRepository repository;
+
     @Autowired
-    private ArticleRepository repository;
+    public ArticleServiceImpl(ArticleRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Article> getAll() {
-        return repository.findAll();
+        List<Article> list = repository.findAll();
+        Collections.reverse(list);
+        return list;
     }
 
     @Override

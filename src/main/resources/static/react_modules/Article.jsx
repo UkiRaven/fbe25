@@ -1,5 +1,16 @@
 import React from "react";
 
+const styles = {
+    container: {
+        backgroundColor: "lightgray",
+        padding: "15px",
+        marginBottom: "15px",
+    },
+    title: {
+        textAlign: "center",
+    }
+};
+
 export default class Article extends React.Component {
     constructor(props) {
         super(props)
@@ -7,13 +18,17 @@ export default class Article extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.props.title}</h1>
+            <div style={styles.container}>
+                <div style={styles.title}>
+                    <h1>{this.props.title}</h1>
+                </div>
                 <div>
                     <p>{this.props.content}</p>
                 </div>
                 <div>
-                    <span>{this.props.creationDate}</span>
+                    <span>{new Date(this.props.creationDate).toLocaleTimeString()
+                    + " " + new Date(this.props.creationDate).toLocaleDateString()
+                    }</span>
                 </div>
             </div>
         )

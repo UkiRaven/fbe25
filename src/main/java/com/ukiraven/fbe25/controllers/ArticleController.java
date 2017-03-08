@@ -15,8 +15,12 @@ import java.util.List;
 @RestController
 public class ArticleController {
 
+    private final ArticleService service;
+
     @Autowired
-    ArticleService service;
+    public ArticleController(ArticleService service) {
+        this.service = service;
+    }
 
     @RequestMapping("/article/{id}")
     public Article getArticle(@PathVariable("id") long id) {

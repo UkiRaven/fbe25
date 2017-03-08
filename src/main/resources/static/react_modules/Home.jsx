@@ -1,5 +1,14 @@
 import React from "react";
 import Clock from "./Clock.jsx";
+import {Link} from "react-router";
+
+const styles = {
+    linkBox: {
+        height: "50px",
+        lineHeight: "50px",
+        textAlign: "center",
+    }
+};
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -9,8 +18,14 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <h1>Look at this clock, this clock is amazing</h1>
                 <Clock/>
+                <div className="link-header" style={styles.linkBox}>
+                    <Link to="/">Home</Link>
+                    <Link to="/about">About</Link>
+                </div>
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

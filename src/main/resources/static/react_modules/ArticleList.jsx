@@ -1,9 +1,17 @@
 import React from "react";
+import Article from "./Article.jsx";
+
+const styles = {
+    container: {
+        width: "85%",
+        margin: "0 auto"
+    }
+};
 
 export default class ArticleList extends React.Component {
     constructor(props) {
         super(props);
-        this.getArticles();
+        this.state = {articles: []};
     }
 
     getArticles() {
@@ -16,10 +24,22 @@ export default class ArticleList extends React.Component {
             })
     }
 
+    componentDidMount() {
+        this.getArticles();
+    }
+
     render() {
+        // console.log(this.state.articles);
+        let elements = this.state.articles.map((article) =>
+            <Article title = {article.title}
+                     content = {article.content}
+                     creationDate = {article.creationDate}
+                     key = {article.id}
+            />
+        );
         return (
-            <div>
-                {this.Articles}
+            <div style={styles.container}>
+                {elements}
             </div>
         )
     }

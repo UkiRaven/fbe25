@@ -4,7 +4,8 @@ import Article from "./Article.jsx";
 const styles = {
     container: {
         width: "85%",
-        margin: "0 auto"
+        maxWidth: "800px",
+        margin: "15px auto"
     }
 };
 
@@ -35,6 +36,7 @@ export default class ArticleList extends React.Component {
                      content = {article.content}
                      creationDate = {article.creationDate}
                      key = {article.id}
+                     id = {article.id}
             />
         );
         return (

@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
-    font-family: "Lato", "Open Sans", sans-serif;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
     color: rgba(0, 0, 0, 0.8);
 }
 
@@ -9,6 +10,7 @@ h1 {
     font-family: "Open Sans", sans-serif;
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
+    font-size: 1.75em;
 }
 
 a {
@@ -18,6 +20,14 @@ a {
 }
 
 .link-header a {
+    font-weight: normal;
+    color: rgba(255,255,255,0.9);
     font-size: 1.2em;
-    margin: 0 30px 0 30px;
+    margin: 0 60px 0 60px;
+    transition: 0.1s;
 }
+
+.link-header a:hover {
+    color: white;
+}
+

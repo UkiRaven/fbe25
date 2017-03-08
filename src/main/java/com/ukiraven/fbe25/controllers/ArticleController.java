@@ -3,10 +3,9 @@ package com.ukiraven.fbe25.controllers;
 import com.ukiraven.fbe25.entity.Article;
 import com.ukiraven.fbe25.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ public class ArticleController {
         this.service = service;
     }
 
-    @RequestMapping("/article/{id}")
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
     public Article getArticle(@PathVariable("id") long id) {
         return service.getById(id);
     }
@@ -30,5 +29,11 @@ public class ArticleController {
     @RequestMapping("/article")
     public List<Article> getAllArticles() {
         return service.getAll();
+    }
+
+    @RequestMapping(value = "article", method = RequestMethod.POST)
+    public Article saveArticle(@RequestBody Article article) {
+        article.setCreationDate(new Date());
+        return service.save(article);
     }
 }

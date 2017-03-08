@@ -2,12 +2,11 @@ import React from "react";
 import Clock from "./Clock.jsx";
 import {Link} from "react-router";
 import Login from "./Login.jsx"
+import ArticleEditor from "./ArticleEditor.jsx"
+import Header from "./Header.jsx";
+
 const styles = {
-    linkBox: {
-        height: "50px",
-        lineHeight: "50px",
-        textAlign: "center",
-    }
+
 };
 
 export default class Home extends React.Component {
@@ -18,12 +17,8 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <Clock/>
-                <Login/>
-                <div className="link-header" style={styles.linkBox}>
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
-                </div>
+                <Header/>
+
                 <div>
                     {this.props.children}
                 </div>

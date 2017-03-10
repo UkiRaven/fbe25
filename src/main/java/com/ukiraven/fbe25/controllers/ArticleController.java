@@ -26,6 +26,11 @@ public class ArticleController {
         return service.getById(id);
     }
 
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.DELETE)
+    public void deleteArticle(@PathVariable("id") long id) {
+        service.delete(id);
+    }
+
     @RequestMapping("/article")
     public List<Article> getAllArticles() {
         return service.getAll();

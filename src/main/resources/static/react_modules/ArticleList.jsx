@@ -5,8 +5,9 @@ const styles = {
     container: {
         width: "85%",
         maxWidth: "800px",
-        margin: "15px auto"
+        margin: "25px auto"
     }
+
 };
 
 export default class ArticleList extends React.Component {

@@ -6,9 +6,6 @@ const styles = {
         margin: "15px auto",
         width: "80%"
     },
-    textBox: {
-        fontFamily: "Lato, sans-serif",
-    },
     titleInput: {
         padding: "5px",
         width: "100%",

@@ -7,7 +7,7 @@ module.exports = {
     watchOptions: {
         aggregateTimeout: 100
     },
-    entry: './index.js',
+    entry: './app.js',
     output: { path: __dirname, filename: 'bundle.js' },
     module: {
         loaders: [

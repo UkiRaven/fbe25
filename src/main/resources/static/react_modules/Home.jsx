@@ -1,27 +1,40 @@
-import React from "react";
-import Clock from "./Clock.jsx";
-import {Link} from "react-router";
-import Login from "./Login.jsx"
-import ArticleEditor from "./ArticleEditor.jsx"
-import Header from "./Header.jsx";
+import React from 'react';
+import ArticleList from './ArticleList.jsx'
+import ContentTable from './ContentTable.jsx'
 
 const styles = {
-
+    container: {
+        width: "75%",
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "space-around",
+    }
 };
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {articles: []};
+    }
+
+    getArticles() {
+        fetch('/api/articles')
+            .then(response => response.json())
+            .then(result => {
+                this.setState({
+                    articles: result._embedded.articles.reverse()
+                })
+            })
+    }
+    componentDidMount() {
+        this.getArticles();
     }
 
     render() {
         return (
-            <div>
-                <Header/>
-
-                <div>
-                    {this.props.children}
-                </div>
+            <div style={styles.container}>
+                <ArticleList articles = {this.state.articles}/>
+                <ContentTable articles = {this.state.articles}/>
             </div>
         )
     }

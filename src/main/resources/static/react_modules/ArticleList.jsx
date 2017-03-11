@@ -3,9 +3,9 @@ import Article from "./Article.jsx";
 
 const styles = {
     container: {
-        width: "85%",
         maxWidth: "800px",
-        margin: "25px auto"
+        minWidth: "400px",
+        // margin: "0 auto"
     }
 
 };
@@ -13,31 +13,19 @@ const styles = {
 export default class ArticleList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {articles: []};
     }
 
-    getArticles() {
-        fetch('/article')
-            .then(response => response.json())
-            .then(result => {
-                this.setState({
-                    articles: result
-                })
-            })
-    }
 
-    componentDidMount() {
-        this.getArticles();
-    }
 
     render() {
         // console.log(this.state.articles);
-        let elements = this.state.articles.map((article) =>
+        let elements = this.props.articles.map((article) =>
             <Article title = {article.title}
                      content = {article.content}
                      creationDate = {article.creationDate}
-                     key = {article.id}
-                     id = {article.id}
+                     key = {article._links.self.href}
+                     href = {article._links.self.href}
+                     id = {article._links.self.href.slice(article._links.self.href.lastIndexOf('/')+1)}
             />
         );
         return (

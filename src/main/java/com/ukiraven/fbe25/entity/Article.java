@@ -2,16 +2,15 @@ package com.ukiraven.fbe25.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.hateoas.core.Relation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lastc on 26.02.2017.
  */
+
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Article {
@@ -21,6 +20,10 @@ public class Article {
     private String title;
     private String content;
     private Date creationDate;
+
+    @ManyToOne
+//    @JoinColumn(name = "author_id", nullable = false)
+    private Account author;
 
     public Article() {
     }
@@ -55,5 +58,13 @@ public class Article {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Account getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Account author) {
+        this.author = author;
     }
 }

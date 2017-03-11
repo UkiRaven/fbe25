@@ -1,4 +1,5 @@
 import React from "react";
+import {hashHistory} from "react-router";
 import TinyMCE from "react-tinymce";
 
 const styles = {
@@ -41,26 +42,35 @@ export default class ArticleEditor extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    goHome() {
+        hashHistory.push("/");
+    }
+
     sendArticle(title, content) {
-        fetch("/article/",
+        let href = "http://192.168.1.101:8082/api/accounts/1";
+        fetch("api/articles/",
             {
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify({title: title, content: content})
+                body: JSON.stringify({
+                    author: href,
+                    title: title,
+                    content: content,
+                    creationDate: new Date()
+                })
             })
             .then(function(res){ return res.json(); })
-            .then(function(data){ alert(JSON.stringify(data))})
+            .then(function(data){ console.log(JSON.stringify(data))})
     }
 
     handleSubmit(e) {
         if (!(this.state.content && this.state.title)) return;
         e.preventDefault();
-        console.log("Value: " + this.state.content);
         this.sendArticle(this.state.title, this.state.content);
         this.setState({title: "", content: ""});
+        this.goHome();
     }
 
     handleTitleChange(e) {
@@ -69,13 +79,12 @@ export default class ArticleEditor extends React.Component {
 
     handleEditorChange(e) {
         this.setState({content: e.target.getContent()});
-        console.log(e.target.getContent());
     }
 
     render() {
         return (
             <div style={styles.container}>
-                <h3>Create your super cool and cute article!</h3>
+                <h2>Create your super cool and cute article!</h2>
                 <form>
                     <div style={styles.titleInputContainer}>
                         <label>Title: </label>

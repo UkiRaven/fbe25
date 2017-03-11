@@ -40,6 +40,7 @@ export default class Header extends React.Component {
                     <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
                     <Link to="/editor">Editor</Link>
+                    <Link to="/authors">Authors</Link>
                 </div>
             </div>
         )

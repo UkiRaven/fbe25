@@ -1,15 +1,16 @@
 import React from 'react'
-import {Link} from "react-router";
+import {Link, hashHistory} from "react-router";
 
 const styles = {
     container: {
-        margin: "25px auto",
+        margin: "0 auto",
         width: "85%",
-        color: "rgba(0,0,0,0.8)",
     },
     article_container: {
+        border: "1px solid rgba(128,128,128,0.25)",
+        backgroundColor: "white",
         position: "relative",
-        boxShadow: "0 0 20px 0 rgba(51,51,51,0.12)",
+        boxShadow: "0 0 10px 0 rgba(51,51,51,0.12)",
         padding: "20px 30px 20px 30px ",
         overflowX: "hidden"
     },
@@ -17,9 +18,12 @@ const styles = {
         textAlign: "center",
     },
     comments: {
+        border: "1px solid rgba(128,128,128,0.25)",
+
+        backgroundColor: "white",
         padding: "30px",
         marginTop: "10px",
-        boxShadow: "0 0 20px 0 rgba(51,51,51,0.12)"
+        boxShadow: "0 0 10px 0 rgba(51,51,51,0.12)"
     },
     link: {
         cursor: "pointer",
@@ -54,8 +58,12 @@ export default class ArticleExtended extends React.Component {
         this.state = {article: {}};
     }
 
-    getArticles() {
-        fetch('/article/' + this.props.params.id)
+    goHome() {
+        hashHistory.push("/");
+    }
+
+    getArticle() {
+        fetch('/api/articles/' + this.props.params.id)
             .then(response => response.json())
             .then(result => {
                 this.setState({
@@ -64,15 +72,16 @@ export default class ArticleExtended extends React.Component {
             })
     }
     componentDidMount() {
-        this.getArticles();
+        this.getArticle();
     }
 
     handleArticleDelete() {
-        fetch("/article/" + this.props.params.id,
+        fetch("api/articles/" + this.props.params.id,
             {
                 method: "DELETE",
             }
-        ).then(response => console.log(response))
+        ).then(response => console.log(response));
+        this.goHome();
     }
 
     render() {

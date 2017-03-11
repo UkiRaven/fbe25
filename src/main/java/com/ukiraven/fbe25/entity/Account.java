@@ -1,6 +1,9 @@
 package com.ukiraven.fbe25.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by lastc on 05.03.2017.
@@ -17,8 +20,11 @@ public class Account {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
+    @OneToMany
+    private List<Article> articles;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -61,6 +67,14 @@ public class Account {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }
 

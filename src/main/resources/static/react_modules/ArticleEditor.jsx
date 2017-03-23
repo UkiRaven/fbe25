@@ -15,6 +15,12 @@ const styles = {
     },
     titleInputContainer: {
         margin: "10px 0 10px 0",
+    },
+    submit: {
+        height: "50px",
+        width: "120px",
+        margin: "15px auto",
+
     }
 };
 const TINYMCE_CONFIG = {
@@ -28,7 +34,7 @@ const TINYMCE_CONFIG = {
     'plugins'   : 'image, lists, link,paste',
     'theme_modern_toolbar_location' : 'top',
     'theme_modern_toolbar_align': 'left',
-    'content_css': '/styles.css'
+    'content_css': '/tinymce.css'
 };
 
 
@@ -47,7 +53,7 @@ export default class ArticleEditor extends React.Component {
     }
 
     sendArticle(title, content) {
-        let href = "http://192.168.1.101:8082/api/accounts/1";
+        let href = "http://192.168.1.101:8082/api/accounts/" + this.props.user.id;
         fetch("api/articles/",
             {
                 headers: {
@@ -82,7 +88,7 @@ export default class ArticleEditor extends React.Component {
     }
 
     render() {
-        return (
+        if (this.props.user.authenticated) return (
             <div style={styles.container}>
                 <h2>Create your super cool and cute article!</h2>
                 <form>
@@ -91,11 +97,12 @@ export default class ArticleEditor extends React.Component {
                         <input value={this.state.title} style={styles.titleInput} onChange={this.handleTitleChange} type="text" name="title"/>
                     </div>
                     <TinyMCE content= {this.state.content}  onChange={this.handleEditorChange} config={TINYMCE_CONFIG} />
-                    <input type="button" name="submit" value="Submit" onClick={this.handleSubmit}/>
+                    <input style={styles.submit} className="button" type="button" name="submit" value="Submit" onClick={this.handleSubmit}/>
                 </form>
 
 
             </div>
-        )
+        );
+        else return <div className="block" style={styles.container}>"You are not authenticated"</div>;
     }
 }

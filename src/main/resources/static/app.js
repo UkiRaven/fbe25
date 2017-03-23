@@ -12,6 +12,8 @@ import ArticleExtended from "./react_modules/ArticleExtended.jsx";
 import ArticleEditor from "./react_modules/ArticleEditor.jsx";
 import UserProfile from "./react_modules/UserProfile.jsx";
 import Authors from "./react_modules/Authors.jsx";
+import Login from "./react_modules/Login.jsx";
+import Register from "./react_modules/Register.jsx";
 
 
 
@@ -21,7 +23,9 @@ ReactDOM.render(
             <Route path='/about' component={About}/>
             <Route path="/editor" component={ArticleEditor}/>
             <Route path="/authors" component={Authors}/>
-            <Route path="user:/id" component={UserProfile}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/user/:id" component={UserProfile}/>
             <Route path="article/:id" component={ArticleExtended}/>
             <IndexRoute component={Home}/>
         </Route>

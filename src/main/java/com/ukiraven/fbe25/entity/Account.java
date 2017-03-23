@@ -1,6 +1,7 @@
 package com.ukiraven.fbe25.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,19 +16,25 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Column(unique=true)
     private String nickname;
-
     private String email;
-
-    @JsonIgnore
+    private String userpic;
+    @JsonProperty
     private String password;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Article> articles;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Transient
+    private boolean authenticated;
+    @Transient
+    private String token;
+
 
     public long getId() {
         return id;
@@ -53,10 +60,11 @@ public class Account {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
-
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -75,6 +83,30 @@ public class Account {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public String getUserpic() {
+        return userpic;
+    }
+
+    public void setUserpic(String userpic) {
+        this.userpic = userpic;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 

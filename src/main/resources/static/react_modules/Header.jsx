@@ -25,6 +25,16 @@ const styles = {
         lineHeight: "50px",
         textAlign: "center",
     },
+    toplink: {
+        display: "inline-block",
+        padding: "10px",
+        color: "white"
+
+    },
+    toplinkBox: {
+        color: 'white',
+        padding: "5px",
+    }
 };
 
 export default class Header extends React.Component {
@@ -33,13 +43,28 @@ export default class Header extends React.Component {
     }
 
     render() {
+        let loggedIn =
+            (<div style={styles.toplinkBox}>
+                <div style={styles.toplink} onClick={this.props.logout} className="button">
+                    Logout
+                </div>
+                <Link style={styles.toplink} className="button" to={"editor"}>Write an article </Link>
+            </div>);
+        let topBlock = (
+            <div style={styles.toplinkBox}>
+                <Link style={styles.toplink} className="button" to={"/login"}>Login</Link>
+                <Link style={styles.toplink} className="button" to={"/register"}>Sign up</Link>
+            </div>);
+        if (this.props.user && this.props.user.authenticated) {
+            topBlock = loggedIn;
+        }
         return (
             <div style={styles.container}>
                 <Clock style = {styles.clock}/>
+                {topBlock}
                 <div className="link-header" style={styles.linkBox}>
                     <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
-                    <Link to="/editor">Editor</Link>
                     <Link to="/authors">Authors</Link>
                 </div>
             </div>

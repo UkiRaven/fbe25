@@ -38,7 +38,7 @@ export default class ContentTable extends React.Component {
         return(
             <div className="content-table" style={styles.container}>
                 <h2>Recent articles</h2>
-                <hr style={{marginBottom: "10px"}}/>
+                <hr style={{marginBottom: "10px", marginTop: "-10px"}}/>
                 {headers}
             </div>
         )

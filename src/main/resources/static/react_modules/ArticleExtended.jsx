@@ -5,6 +5,7 @@ const styles = {
     container: {
         margin: "0 auto",
         width: "85%",
+        minWidth: "500px",
     },
     article_container: {
         border: "1px solid rgba(128,128,128,0.25)",
@@ -55,7 +56,7 @@ export default class ArticleExtended extends React.Component {
     constructor(props) {
         super(props);
         this.handleArticleDelete = this.handleArticleDelete.bind(this);
-        this.state = {article: {}};
+        this.state = {article: {}, author: {}, authorId: ""};
     }
 
     goHome() {
@@ -71,8 +72,20 @@ export default class ArticleExtended extends React.Component {
                 })
             })
     }
+
+    getAuthor() {
+        fetch('/api/articles/' + this.props.params.id + '/author')
+            .then(response => response.json())
+            .then(result => {
+                this.setState({
+                    author: result,
+                    authorId: result._links.self.href.slice(result._links.self.href.lastIndexOf('/')+1),
+                })
+            })
+    }
     componentDidMount() {
         this.getArticle();
+        this.getAuthor();
     }
 
     handleArticleDelete() {
@@ -95,11 +108,17 @@ export default class ArticleExtended extends React.Component {
                     <div dangerouslySetInnerHTML={content}>
 
                     </div>
-                    <div><span>{new Date(this.state.article.creationDate).toLocaleTimeString()
+                    <span>Created at {new Date(this.state.article.creationDate).toLocaleTimeString().slice(0, -3)
                     + " " + new Date(this.state.article.creationDate).toLocaleDateString()
-                    }</span></div>
-                    <div style={styles.link}>Edit</div>
-                    <div style={styles.link2} onClick={this.handleArticleDelete}>Delete</div>
+                    }</span>
+                    <span>
+                        {" by "}
+                        <Link to={"/user/" + this.state.authorId}>
+                            {this.state.author.nickname}
+                        </Link>
+                    </span>
+                    <button style={styles.link}>Edit</button>
+                    <button style={styles.link2} onClick={this.handleArticleDelete}>Delete</button>
                 </div>
                     <div style={styles.comments}>
                         Comments

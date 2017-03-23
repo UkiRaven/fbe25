@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from "react-router";
 
 const styles = {
     table: {
         backgroundColor: "white",
-        width: "75%",
+        width: "85%",
         margin: "0 auto",
         border: "1px solid rgba(0,0,0,0.2)",
         padding: "10px 25px 10px 25px",
@@ -21,13 +22,12 @@ export default class UserTable extends React.Component {
         let userNames = this.props.users.map(
             (user) => <tr key={user._links.self.href}>
                         <td>
-                            {user.nickname}
+                            <Link to={"/user/" + user._links.self.href.slice(user._links.self.href.lastIndexOf('/')+1)}>
+                                {user.nickname}
+                            </Link>
                         </td>
                         <td>
                             {user.email}
-                        </td>
-                        <td>
-                            {user.role}
                         </td>
                      </tr>
         );
@@ -37,7 +37,6 @@ export default class UserTable extends React.Component {
                     <tr>
                         <th>Nickname</th>
                         <th>Email</th>
-                        <th>Role</th>
                         <th>Articles count</th>
                         <th>Rating</th>
                     </tr>

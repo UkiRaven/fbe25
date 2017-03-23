@@ -21,6 +21,7 @@ export default class Home extends React.Component {
         fetch('/api/articles')
             .then(response => response.json())
             .then(result => {
+                // console.log("getting data");
                 this.setState({
                     articles: result._embedded.articles.reverse()
                 })

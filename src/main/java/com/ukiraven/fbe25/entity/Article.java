@@ -22,7 +22,7 @@ public class Article {
     private Date creationDate;
 
     @ManyToOne
-//    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "author_id")
     private Account author;
 
     public Article() {
